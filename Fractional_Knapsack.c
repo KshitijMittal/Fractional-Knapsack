@@ -1,6 +1,7 @@
 // Fractional Knapsack Program
 
 #include <stdio.h>
+
 int main() {
     int n , capacity;
     printf("Enter the number of items: ");
@@ -15,24 +16,24 @@ int main() {
         printf("Enter the weight and value of item %d: ", i + 1);
         scanf("%d %d", &weight[i], &value[i]);
         ratio[i] = (float)value[i] / weight[i];
-        x[i] = 0; // Initialize x[i] to 0
+        x[i] = 0; 
     }
 
-    // Sort items by value-to-weight ratio in descending order
     for (int i = 0; i < n - 1; i++) {
-        for (int j = 0 + 1; j < n - i; j++) {
+        for (int j = 0; j < n - i - 1; j++) {
             if (ratio[j] < ratio[j + 1]) {
-                // Swap ratio
+                
+                // Swap Ratio
                 float tempRatio = ratio[j];
                 ratio[j] = ratio[j + 1];
                 ratio[j + 1] = tempRatio;
-
-                // Swap weight
+                
+                // Swap Weight 
                 int tempWeight = weight[j];
                 weight[j] = weight[j + 1];
                 weight[j + 1] = tempWeight;
-
-                // Swap value
+                
+                // Swap Value
                 int tempValue = value[j];
                 value[j] = value[j + 1];
                 value[j + 1] = tempValue;
@@ -42,26 +43,20 @@ int main() {
 
     float totalValue = 0.0;
     int currentWeight = 0;
-    int x[n];
-    
-    for (int i = 0; i < n; i++) {
-        x[i] = 0; // Initialize x[i] to 0
-    }
 
     for (int i = 0; i < n; i++) {
         if (currentWeight + weight[i] <= capacity) {
-            x[i] = 1; // Take the whole item
+            x[i] = 1;
             currentWeight += weight[i];
             totalValue += value[i];
         } else {
-            int remaining capacity = capacity - currentWeight;
-            x[i] = (float)(remaining / weight[i]); // Take the fraction of the item
-            totalValue += ratio[i] * remaining;
-            break; // Knapsack is full
+            int remaining_capacity = capacity - currentWeight;
+            x[i] = (float)remaining_capacity / weight[i];  
+            totalValue += ratio[i] * remaining_capacity;
+            break;
         }
     }
 
     printf("Maximum value in Knapsack = %.2f\n", totalValue);
-
     return 0;
-} 
+}
